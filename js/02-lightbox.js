@@ -19,9 +19,6 @@ const makeSiteStructure = galleryItems.map(makeGalleryItemsLibrary).join('');
 images.innerHTML = makeSiteStructure;
 
 //Opening pictures
-images.addEventListener('click', e => {
-  e.preventDefault();
-});
 
 let lightbox = new SimpleLightbox('.gallery a', {
   close: true,

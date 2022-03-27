@@ -32,9 +32,19 @@ function onOpenModal(e) {
   window.addEventListener('keydown', onEscPress);
   e.preventDefault();
   //console.dir(e.target.dataset.source);
-  const instance = basicLightbox.create(`
+  const instance = basicLightbox.create(
+    `
 		<img width="1280" src= '${e.target.dataset.source}'>
-	`);
+	`,
+    {
+      onShow: instance => {
+        addEventListener;
+      },
+      onClose: instance => {
+        removeEventListener;
+      },
+    },
+  );
   instance.show();
 
   // Closing pictures by pressing on Esc
