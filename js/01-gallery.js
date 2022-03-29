@@ -26,32 +26,37 @@ const makeSiteStructure = galleryItems.map(makeGalleryItemsLibrary).join('');
 images.innerHTML = makeSiteStructure;
 
 //Opening pictures
+
+const instance = basicLightbox.create(
+  `
+		<img class="modal-img" src= ''>
+	`,
+  {
+    onShow: instance => {
+      window.addEventListener('keydown', onEscPress);
+    },
+    onClose: instance => {
+      window.addEventListener('keydown', onEscPress);
+    },
+  },
+);
+
 images.addEventListener('click', onOpenModal);
 
 function onOpenModal(e) {
-  window.addEventListener('keydown', onEscPress);
   e.preventDefault();
+  if (e.target.nodeName !== 'IMG') {
+    return;
+  }
+  instance.element().querySelector('.modal-img').src = e.target.dataset.source;
   //console.dir(e.target.dataset.source);
-  const instance = basicLightbox.create(
-    `
-		<img width="1280" src= '${e.target.dataset.source}'>
-	`,
-    {
-      onShow: instance => {
-        addEventListener;
-      },
-      onClose: instance => {
-        removeEventListener;
-      },
-    },
-  );
   instance.show();
+}
 
-  // Closing pictures by pressing on Esc
-  function onEscPress(elem) {
-    if (elem.key === 'Escape') {
-      instance.close();
-      window.removeEventListener('keydown', onEscPress);
-    }
+// Closing pictures by pressing on Esc
+function onEscPress(elem) {
+  if (elem.key === 'Escape') {
+    instance.close();
+    window.removeEventListener('keydown', onEscPress);
   }
 }
